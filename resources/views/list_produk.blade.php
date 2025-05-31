@@ -1,27 +1,46 @@
-@extends('layouts.app')
-
-@section('content')
+<script src="https://cdn.tailwindcss.com"></script>
 <div class="ml-10 mt-20">
-    <h1 class="text-2xl font-bold mb-4 text-orange-600">Daftar Produk</h1>
-    <table class="min-w-[80%] border border-orange-400 shadow-lg rounded-lg overflow-hidden">
+
+    <table class="table-auto">
         <thead>
-            <tr class="bg-orange-500 text-white">
-                <th class="px-6 py-3 text-left text-sm font-semibold">No</th>
-                <th class="px-6 py-3 text-left text-sm font-semibold">Nama Produk</th>
-                <th class="px-6 py-3 text-left text-sm font-semibold">Deskripsi Produk</th>
-                <th class="px-6 py-3 text-left text-sm font-semibold">Harga Produk</th>
+            <tr class="bg-blue-400">
+                <th>No</th>
+                <th>Nama Produk</th>
+                <th>Deskripsi Produk</th>
+                <th>Harga Produk</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($nama as $index => $item)
-            <tr class="bg-yellow-100 border-b border-orange-300 hover:bg-yellow-200">
-                <td class="px-6 py-4">{{ $index + 1 }}</td>
-                <td class="px-6 py-4">{{ $item }}</td>
-                <td class="px-6 py-4">{{ $desc[$index] }}</td>
-                <td class="px-6 py-4">{{ $harga[$index] }}</td>
+            <tr class="bg-blue-200">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $item }}</td>
+                <td>{{ $desc[$index] }}</td>
+                <td>{{ $harga[$index] }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 </div>
-@endsection
+
+<div> <h1>Input Produk</h1></div>
+<form method="POST" action="{{ route('produk.simpan') }}">
+    @csrf
+    <table class="table">
+        <tr>
+            <td>Nama:</td>
+            <td colspan="3"><input type="text" class="form-control" id="nama" name="nama"></td>
+            </tr>
+            <tr>
+                <td>Deskripsi:</td>
+                <td colspan="3"><textarea class="form-control" id="deskripsi" name="deskripsi"></textarea></td>
+            </tr>
+            <tr>
+                <td>Harga:</td>
+                <td><input type="number" class="form-control" id="harga" name="harga"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+    </form>
